@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/level_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="第"
+        android:textSize="35sp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="155dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="200dp" />
+
+    <TextView
+        android:id="@+id/center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="一"
+        android:textSize="35sp"
+        app:layout_constraintStart_toEndOf="@id/level_start"
+        app:layout_constraintTop_toTopOf="@id/level_start" />
+
+    <TextView
+        android:id="@+id/level_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="關"
+        android:textSize="35sp"
+        app:layout_constraintStart_toEndOf="@id/center"
+        app:layout_constraintTop_toTopOf="@id/level_start" />
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="題目名稱"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintTop_toBottomOf="@id/level_start"/>
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="題目簡述"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintTop_toBottomOf="@id/content"/>
+
+    <TextView
+        android:id="@+id/star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="難度:"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="150dp"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:id="@+id/star_contnet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="一顆星"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@id/star"
+        app:layout_constraintTop_toTopOf="@id/star"/>
+
+    <TextView
+        android:id="@+id/award"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="鑽石:"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="150dp"
+        app:layout_constraintTop_toBottomOf="@id/star"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/award_contnet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5個"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@id/award"
+        app:layout_constraintTop_toTopOf="@id/award"/>
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:text="開始關卡"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@id/award"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="40dp"/>
+
+    <ImageView
+        android:id="@+id/put_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:srcCompat="@tools:sample/avatars"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

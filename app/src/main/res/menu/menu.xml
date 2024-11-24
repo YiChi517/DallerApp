@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="首頁"
+        android:id="@+id/home"
+        android:icon="@drawable/baseline_home_24"
+        />
+    <item
+        android:title="搜尋"
+        android:id="@+id/search"/>
+    <item
+        android:title="個人練習"
+        android:id="@+id/practice"/>
+    <item
+        android:title="個人資料"
+        android:id="@+id/person"
+        android:icon="@drawable/baseline_account_circle_24"/>
+
+<!--更改圖示要放 icon:-->
+</menu>
