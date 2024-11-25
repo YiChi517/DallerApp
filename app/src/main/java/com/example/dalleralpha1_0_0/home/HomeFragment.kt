@@ -1,5 +1,6 @@
 package com.example.dalleralpha1_0_0.home
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -18,6 +19,10 @@ import retrofit2.Response
 
 class HomeFragment : Fragment() {
 
+    private lateinit var buttons: List<Button>
+    private val totalLevels = 4 // 假設有 4 關
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -33,16 +38,36 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //第一關
-        val button1 = view.findViewById<Button>(R.id.level1)
-        button1.setOnClickListener {
-            fetchLevelInformation("level.1")
+        // 從 API 獲取數據並更新 Toolbar 的 TextView
+
+
+        // 初始化按鈕列表
+        buttons = listOf(
+            view.findViewById(R.id.level1),
+            view.findViewById(R.id.level2),
+            view.findViewById(R.id.level3),
+            view.findViewById(R.id.level4)
+        )
+
+        updateButtonStates()
+
+        // 設置按鈕點擊事件
+        buttons.forEachIndexed { index, button ->
+            button.setOnClickListener {
+                fetchLevelInformation("level.${index + 1}")
+            }
         }
-        //第二關
-        val button2 = view.findViewById<Button>(R.id.level2)
-        button2.setOnClickListener {
-            fetchLevelInformation("level.2")
-        }
+
+//        //第一關
+//        val button1 = view.findViewById<Button>(R.id.level1)
+//        button1.setOnClickListener {
+//            fetchLevelInformation("level.1")
+//        }
+//        //第二關
+//        val button2 = view.findViewById<Button>(R.id.level2)
+//        button2.setOnClickListener {
+//            fetchLevelInformation("level.2")
+//        }
         //以此類推
     }
 
@@ -56,6 +81,7 @@ class HomeFragment : Fragment() {
                         val bundle = Bundle().apply {
                             putParcelable("information", information)
                             putString("levelId", levelId) // 傳遞 levelId
+                            putInt("levelNumber",information.levelNumber) //傳遞levelNumber
                         }
                         // 導航到 StartFragment 並傳遞數據
                         val startFragment = StartFragment().apply {
@@ -83,6 +109,19 @@ class HomeFragment : Fragment() {
                 Log.e("fetchLevelInformation", "請求失敗: $t")
             }
         })
+    }
+    private fun updateButtonStates() {
+        val sharedPreferences = requireContext().getSharedPreferences("GameProgress", Context.MODE_PRIVATE)
+
+        // 動態檢查各關卡的解鎖狀態
+        buttons.forEachIndexed { index, button ->
+            val isUnlocked = sharedPreferences.getBoolean("level${index + 1}Unlocked", index == 0)
+            button.isEnabled = isUnlocked
+        }
+    }
+    override fun onResume() {
+        super.onResume()
+        updateButtonStates() // 確保返回頁面後按鈕狀態更新
     }
 }
 
