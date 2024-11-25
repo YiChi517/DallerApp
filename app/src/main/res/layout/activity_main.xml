@@ -5,76 +5,99 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FADD98"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="Login"
-        android:textSize="40sp"
+    <Button
+        android:id="@+id/login"
+        android:layout_width="125dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/login_textinput_2"
+        android:text="登入"
+        android:textAlignment="center"
+        android:textColor="#865534"
+        android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/ac"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="250dp"
-        android:text="帳號:"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/pw" />
 
     <EditText
         android:id="@+id/ac_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="請輸入帳號"
-        android:textSize="25sp"
-        android:textStyle="bold"
+        android:layout_width="192dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="-6dp"
+        android:background="@drawable/login_textinput"
+        android:bufferType="normal"
+        android:hint=" 請輸入帳號"
+        android:inputType="text|textEmailAddress"
+        android:lineSpacingExtra="8sp"
         android:singleLine="true"
-        android:inputType="textEmailAddress"
+        android:textAlignment="textStart"
+        android:textColor="#574E47"
+        android:textSize="20sp"
+        android:textStyle="normal"
         app:layout_constraintStart_toEndOf="@+id/ac"
         app:layout_constraintTop_toTopOf="@+id/ac" />
 
     <TextView
         android:id="@+id/pw"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="密碼:"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/ac"
+        android:layout_height="37dp"
+        android:layout_marginTop="54dp"
+        android:text="密碼："
+        android:textSize="24sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.22"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ac" />
+
+    <TextView
+        android:id="@+id/ac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="392dp"
+        android:text="帳號："
+        android:textSize="24sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.22"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/login_logo"
+        app:layout_constraintBottom_toTopOf="@+id/ac"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.61"
+        />
 
     <EditText
         android:id="@+id/pw_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="請輸入密碼"
-        android:textSize="25sp"
-        android:textStyle="bold"
+        android:layout_width="192dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="-6dp"
+        android:background="@drawable/login_textinput"
+        android:bufferType="normal"
+        android:hint=" 請輸入密碼"
         android:inputType="textPassword"
+        android:lineSpacingExtra="8sp"
         android:singleLine="true"
+        android:textAlignment="textStart"
+        android:textColor="#574E47"
+        android:textSize="20sp"
+        android:textStyle="normal"
         app:layout_constraintStart_toEndOf="@+id/pw"
-        app:layout_constraintTop_toTopOf="@id/pw" />
-
-    <Button
-        android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:text="登入"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pw" />
+        app:layout_constraintTop_toTopOf="@+id/pw" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
