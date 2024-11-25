@@ -23,12 +23,15 @@ class StartFragment : Fragment() {
 
     private var information: Information? = null
     private var levelId: String? = null
+    private var levelNumber: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         information = arguments?.getParcelable("information")
         levelId = arguments?.getString("levelId")
+        levelNumber = arguments?.getInt("levelNumber")
+
     }
 
     override fun onCreateView(
@@ -69,6 +72,7 @@ class StartFragment : Fragment() {
                         if (questions != null) {
                             val bundle = Bundle().apply {
                                 putParcelableArrayList("questions", ArrayList(questions))
+                                putInt("id",levelNumber!!)
                             }
                             // 導航到 LevelFragment 並傳遞數據
                             val levelFragment = LevelFragment().apply {

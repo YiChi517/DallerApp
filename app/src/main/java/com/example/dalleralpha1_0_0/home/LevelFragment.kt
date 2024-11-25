@@ -22,6 +22,7 @@ class LevelFragment : Fragment() {
     private var currentQuestionIndex = 0
     private  var right_Answer = 0
     private  var wrong_Answer = 0
+    private var levelNumber: Int? = null
 
     lateinit var A1Button:Button
     lateinit var A2Button:Button
@@ -32,6 +33,7 @@ class LevelFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         questions = arguments?.getParcelableArrayList("questions")
+        levelNumber = arguments?.getInt("id")
     }
 
     override fun onCreateView(
@@ -146,7 +148,7 @@ class LevelFragment : Fragment() {
     private fun navigateToResultPage() {
         val menuActivity = activity as? MenuActivity
         if (right_Answer > (questions?.size ?: 0)/2) {
-            menuActivity?.replaceFragment(SuccessFragment(right_Answer))
+            menuActivity?.replaceFragment(SuccessFragment(right_Answer,levelNumber!!))
         }else{
             menuActivity?.replaceFragment(FailFragment(wrong_Answer))
         }
