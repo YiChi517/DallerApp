@@ -39,12 +39,7 @@ class MenuActivity : AppCompatActivity() {
                     transaction.replace(R.id.fragmentContainerHome, PersonFragment()).commit()
                     return true
                 }
-                R.id.practice -> {
-                    val manager = supportFragmentManager
-                    val transaction = manager.beginTransaction()
-                    transaction.replace(R.id.fragmentContainerHome, PracticeFragment()).commit()
-                    return true
-                }
+
                 R.id.search -> {
                     val manager = supportFragmentManager
                     val transaction = manager.beginTransaction()

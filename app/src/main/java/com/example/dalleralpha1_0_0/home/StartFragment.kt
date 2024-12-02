@@ -49,8 +49,6 @@ class StartFragment : Fragment() {
         information?.let { info ->
             view.findViewById<TextView>(R.id.center).text = info.levelNumber.toString()
             view.findViewById<TextView>(R.id.content).text = info.gameTitle
-            view.findViewById<TextView>(R.id.description).text = info.description
-            view.findViewById<TextView>(R.id.star_contnet).text = info.difficulty
             view.findViewById<TextView>(R.id.award_contnet).text = info.reward.toString()
         }
         //取得第一關level.1的題目
