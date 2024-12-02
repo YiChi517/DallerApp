@@ -72,7 +72,7 @@ class LevelFragment : Fragment() {
         questions?.let { questionsList ->
             if (currentQuestionIndex < questionsList.size) {
                 val question = questionsList[currentQuestionIndex]
-                view?.findViewById<TextView>(R.id.title)?.text = question.id
+                view?.findViewById<TextView>(R.id.title_content)?.text = question.questionsnumber
                 view?.findViewById<TextView>(R.id.content)?.text = question.questionText
                 A1Button.text = question.options1
                 A2Button.text = question.options2
@@ -152,7 +152,6 @@ class LevelFragment : Fragment() {
         }else{
             menuActivity?.replaceFragment(FailFragment(wrong_Answer))
         }
-        menuActivity?.showBottomNavigation()
     }
 }
 

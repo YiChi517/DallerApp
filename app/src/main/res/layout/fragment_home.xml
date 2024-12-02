@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     android:background="#231F1E">
 
+    <!-- Include the toolbar -->
+    <include
+        layout="@layout/custom_toolbar" />
 
     <Button
         android:id="@+id/level1"

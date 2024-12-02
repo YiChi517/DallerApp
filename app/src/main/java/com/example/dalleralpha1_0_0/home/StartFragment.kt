@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.dalleralpha1_0_0.MenuActivity
@@ -32,6 +33,8 @@ class StartFragment : Fragment() {
         levelId = arguments?.getString("levelId")
         levelNumber = arguments?.getInt("levelNumber")
 
+        requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+
     }
 
     override fun onCreateView(
@@ -49,12 +52,36 @@ class StartFragment : Fragment() {
         information?.let { info ->
             view.findViewById<TextView>(R.id.center).text = info.levelNumber.toString()
             view.findViewById<TextView>(R.id.content).text = info.gameTitle
-            view.findViewById<TextView>(R.id.description).text = info.description
-            view.findViewById<TextView>(R.id.star_contnet).text = info.difficulty
             view.findViewById<TextView>(R.id.award_contnet).text = info.reward.toString()
+            //判斷難度，更改layout顯示畫面
+            when (info.difficulty){
+                2.toString() -> { view.findViewById<ImageView>(R.id.imageView7).setImageResource(R.drawable.star_full) }
+                3.toString() -> {
+                    view.findViewById<ImageView>(R.id.imageView7).setImageResource(R.drawable.star_full)
+                    view.findViewById<ImageView>(R.id.imageView9).setImageResource(R.drawable.star_full)
+                }
+                4.toString() -> {
+                    view.findViewById<ImageView>(R.id.imageView7).setImageResource(R.drawable.star_full)
+                    view.findViewById<ImageView>(R.id.imageView9).setImageResource(R.drawable.star_full)
+                    view.findViewById<ImageView>(R.id.imageView10).setImageResource(R.drawable.star_full)
+                }
+                5.toString() -> {
+                    view.findViewById<ImageView>(R.id.imageView7).setImageResource(R.drawable.star_full)
+                    view.findViewById<ImageView>(R.id.imageView9).setImageResource(R.drawable.star_full)
+                    view.findViewById<ImageView>(R.id.imageView10).setImageResource(R.drawable.star_full)
+                    view.findViewById<ImageView>(R.id.imageView12).setImageResource(R.drawable.star_full)
+                }
+                else -> {
+                    // 處理無效值
+                    Log.e("DifficultyError", "Invalid difficulty: ${info.difficulty}")
+                }
+            }
         }
+
+
         //取得第一關level.1的題目
         val start = view.findViewById<Button>(R.id.start)
+        Log.d("ViewType", "start is of type: ${start::class.java.name}")
         start.setOnClickListener {
             fetchQuestions(levelId!!)
         }

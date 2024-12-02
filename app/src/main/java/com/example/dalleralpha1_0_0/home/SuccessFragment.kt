@@ -39,6 +39,8 @@ class SuccessFragment(private val rightAnswer:Int, private var currentLevel: Int
             if (nextLevel <= 4) {
                 sharedPreferences.edit().putBoolean("level$nextLevel" + "Unlocked", true).apply()
             }
+            //打更新reward數量
+
             //返回HomeFragment
             val menuActivity = activity as? MenuActivity
             menuActivity?.replaceFragment(HomeFragment())

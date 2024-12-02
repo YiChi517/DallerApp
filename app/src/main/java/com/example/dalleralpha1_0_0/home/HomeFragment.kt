@@ -8,9 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import com.example.dalleralpha1_0_0.MenuActivity
 import com.example.dalleralpha1_0_0.R
 import com.example.dalleralpha1_0_0.api.Api
+import com.example.dalleralpha1_0_0.api.Info
 import com.example.dalleralpha1_0_0.api.Information
 import retrofit2.Call
 import retrofit2.Callback
@@ -38,8 +40,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 從 API 獲取數據並更新 Toolbar 的 TextView
-
+        // 建立此畫面都要先打一次reward
+//        fetchReward()
 
         // 初始化按鈕列表
         buttons = listOf(
@@ -69,6 +71,27 @@ class HomeFragment : Fragment() {
 //            fetchLevelInformation("level.2")
 //        }
         //以此類推
+    }
+    private fun fetchReward(){
+        Api.infoService.getInfo().enqueue(object : Callback<Info>{
+            override fun onResponse(call: Call<Info>, response: Response<Info>) {
+                if (response.isSuccessful) {
+                    val reward = view!!.findViewById<TextView>(R.id.reward)
+                    val info = response.body() // 獲取返回的 Info 對象
+                    info?.let {
+                        // 顯示 reward
+                        reward.text = it.score.toString() // 將 reward 顯示在 TextView 上
+                    }
+                } else {
+                    // 處理API錯誤
+                    Log.e("fetchReward", "API 請求失敗: ${response.code()} - ${response.message()}")
+                }
+            }
+            override fun onFailure(call: Call<Info>, t: Throwable) {
+                // 處理請求錯誤
+                Log.e("fetchReward", "請求失敗: $t")
+            }
+        })
     }
 
     private fun fetchLevelInformation(levelId: String) {

@@ -36,6 +36,15 @@ interface LevelInformationService {
     fun getInformation(@Path("levelId") levelId: String): Call<Information>
 }
 
+interface InfoService {
+    // 獲取個人資料
+    @Headers("Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxpdHRsZWRhQGdtYWlsLmNvbSIsInN1YiI6IkRvbGxhckF1dGhlbnRpY2F0aW9uIiwiaXNzIjoiZG9sbGFyIFNlcnZlciJ9.E6-zdWk67cR7zd06htj-SaEGQsIprVXH3H4Pm9No6edMlKi2JPhgJxP1TYUDOC3PYsjqPxcPv2eEMW947aNjhA", "Content-Type: application/json")
+    @GET("users/info")
+    fun getInfo(): Call<Info>
+}
+
+
+
 object Api {
     private val retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
@@ -45,5 +54,6 @@ object Api {
     val retrofitService: LoginService = retrofit.create(LoginService::class.java) //登入
     val levelService: LevelService = retrofit.create(LevelService::class.java) //打題目
     val levelInformationService: LevelInformationService = retrofit.create(LevelInformationService::class.java) //打關卡資訊
+    val infoService : InfoService = retrofit.create(InfoService::class.java) //打關卡資訊
 }
 
