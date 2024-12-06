@@ -84,6 +84,7 @@ class HomeFragment : Fragment() {
                             putParcelable("information", information)
                             putString("levelId", levelId) // 傳遞 levelId
                             putInt("levelNumber",information.levelNumber) //傳遞levelNumber
+                            putInt("reward",information.reward) //傳遞此關通關成功會得到的鑽石數量
                         }
                         // 導航到 StartFragment 並傳遞數據
                         val startFragment = StartFragment().apply {

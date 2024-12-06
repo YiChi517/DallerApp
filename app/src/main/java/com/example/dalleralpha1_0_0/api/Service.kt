@@ -36,16 +36,26 @@ interface LevelInformationService {
 
 interface LevelService {
     // 獲取特定關卡問題
-//
     @GET("games/levels/{levelId}/questions")
     fun getQuestionsByLevel(@Path("levelId") levelId: String): Call<List<Question>>
 }
 
 interface InfoService {
     // 獲取個人資料
-//    @Headers("Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxpdHRsZWRhQGdtYWlsLmNvbSIsInN1YiI6IkRvbGxhckF1dGhlbnRpY2F0aW9uIiwiaXNzIjoiZG9sbGFyIFNlcnZlciJ9.E6-zdWk67cR7zd06htj-SaEGQsIprVXH3H4Pm9No6edMlKi2JPhgJxP1TYUDOC3PYsjqPxcPv2eEMW947aNjhA", "Content-Type: application/json")
     @GET("users/info")
     fun getInfo(): Call<Info>
+}
+
+interface SendToRewardService {
+    // 存記錄到rewards這張表
+    @POST("games/levels/{levelId}/rewards")
+    fun saveTorewards(@Path("levelId") levelId: String,@Body UpdateRequest:UpdateRequest):Call<Void>
+}
+
+interface UpdateScoreService {
+    // 更新總鑽石數量至info
+    @POST("users/updateScore")
+    fun updateScore(@Body UpdateScoreRequest:UpdateScoreRequest):Call<Void>
 }
 
 object Api {
@@ -53,5 +63,7 @@ object Api {
     val levelInformationService: LevelInformationService = retrofit.create(LevelInformationService::class.java) //打關卡資訊
     val levelService: LevelService = retrofit.create(LevelService::class.java) //打題目
     val infoService : InfoService = retrofit.create(InfoService::class.java) //打關卡資訊
+    val sendToRewardService : SendToRewardService = retrofit.create(SendToRewardService::class.java) //存記錄到rewards這張表
+    val updateScoreService : UpdateScoreService = retrofit.create(UpdateScoreService::class.java) //存記錄到rewards這張表
 }
 

@@ -25,6 +25,7 @@ class StartFragment : Fragment() {
     private var information: Information? = null
     private var levelId: String? = null
     private var levelNumber: Int? = null
+    private var reward = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +33,7 @@ class StartFragment : Fragment() {
         information = arguments?.getParcelable("information")
         levelId = arguments?.getString("levelId")
         levelNumber = arguments?.getInt("levelNumber")
+        reward = arguments?.getInt("reward")!!
 
         requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 
@@ -99,10 +101,10 @@ class StartFragment : Fragment() {
                         if (questions != null) {
                             val bundle = Bundle().apply {
                                 putParcelableArrayList("questions", ArrayList(questions))
-                                putInt("id",levelNumber!!)
+                                putInt("levelNumber",levelNumber!!)
                             }
                             // 導航到 LevelFragment 並傳遞數據
-                            val levelFragment = LevelFragment().apply {
+                            val levelFragment = LevelFragment(levelId,reward).apply {
                                 arguments = bundle
                             }
                             val menuActivity = activity as? MenuActivity
