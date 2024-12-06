@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.dalleralpha1_0_0.MenuActivity
@@ -24,6 +25,7 @@ class StartFragment : Fragment() {
     private var information: Information? = null
     private var levelId: String? = null
     private var levelNumber: Int? = null
+    private var reward = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +33,9 @@ class StartFragment : Fragment() {
         information = arguments?.getParcelable("information")
         levelId = arguments?.getString("levelId")
         levelNumber = arguments?.getInt("levelNumber")
+        reward = arguments?.getInt("reward")!!
+
+        requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 
     }
 
@@ -50,9 +55,35 @@ class StartFragment : Fragment() {
             view.findViewById<TextView>(R.id.center).text = info.levelNumber.toString()
             view.findViewById<TextView>(R.id.content).text = info.gameTitle
             view.findViewById<TextView>(R.id.award_contnet).text = info.reward.toString()
+            //判斷難度，更改layout顯示畫面
+            when (info.difficulty){
+                2.toString() -> { view.findViewById<ImageView>(R.id.imageView7).setImageResource(R.drawable.star_full) }
+                3.toString() -> {
+                    view.findViewById<ImageView>(R.id.imageView7).setImageResource(R.drawable.star_full)
+                    view.findViewById<ImageView>(R.id.imageView9).setImageResource(R.drawable.star_full)
+                }
+                4.toString() -> {
+                    view.findViewById<ImageView>(R.id.imageView7).setImageResource(R.drawable.star_full)
+                    view.findViewById<ImageView>(R.id.imageView9).setImageResource(R.drawable.star_full)
+                    view.findViewById<ImageView>(R.id.imageView10).setImageResource(R.drawable.star_full)
+                }
+                5.toString() -> {
+                    view.findViewById<ImageView>(R.id.imageView7).setImageResource(R.drawable.star_full)
+                    view.findViewById<ImageView>(R.id.imageView9).setImageResource(R.drawable.star_full)
+                    view.findViewById<ImageView>(R.id.imageView10).setImageResource(R.drawable.star_full)
+                    view.findViewById<ImageView>(R.id.imageView12).setImageResource(R.drawable.star_full)
+                }
+                else -> {
+                    // 處理無效值
+                    Log.e("DifficultyError", "Invalid difficulty: ${info.difficulty}")
+                }
+            }
         }
+
+
         //取得第一關level.1的題目
         val start = view.findViewById<Button>(R.id.start)
+        Log.d("ViewType", "start is of type: ${start::class.java.name}")
         start.setOnClickListener {
             fetchQuestions(levelId!!)
         }
@@ -70,10 +101,10 @@ class StartFragment : Fragment() {
                         if (questions != null) {
                             val bundle = Bundle().apply {
                                 putParcelableArrayList("questions", ArrayList(questions))
-                                putInt("id",levelNumber!!)
+                                putInt("levelNumber",levelNumber!!)
                             }
                             // 導航到 LevelFragment 並傳遞數據
-                            val levelFragment = LevelFragment().apply {
+                            val levelFragment = LevelFragment(levelId,reward).apply {
                                 arguments = bundle
                             }
                             val menuActivity = activity as? MenuActivity

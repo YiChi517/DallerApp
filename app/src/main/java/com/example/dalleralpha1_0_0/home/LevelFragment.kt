@@ -16,24 +16,25 @@ import com.example.dalleralpha1_0_0.R
 import com.example.dalleralpha1_0_0.api.Question
 
 
-class LevelFragment : Fragment() {
+class LevelFragment(private var levelid:String,private var reward:Int) : Fragment() {
 
     private var questions: ArrayList<Question>? = null
     private var currentQuestionIndex = 0
     private  var right_Answer = 0
     private  var wrong_Answer = 0
-    private var levelNumber: Int? = null
+    private var levelNumber = 1
 
     lateinit var A1Button:Button
     lateinit var A2Button:Button
     lateinit var A3Button:Button
     lateinit var A4Button:Button
     lateinit var answer:String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         questions = arguments?.getParcelableArrayList("questions")
-        levelNumber = arguments?.getInt("id")
+        levelNumber = arguments?.getInt("levelNumber")!!
     }
 
     override fun onCreateView(
@@ -72,7 +73,7 @@ class LevelFragment : Fragment() {
         questions?.let { questionsList ->
             if (currentQuestionIndex < questionsList.size) {
                 val question = questionsList[currentQuestionIndex]
-                view?.findViewById<TextView>(R.id.title)?.text = question.id
+                view?.findViewById<TextView>(R.id.title_content)?.text = question.questionsnumber
                 view?.findViewById<TextView>(R.id.content)?.text = question.questionText
                 A1Button.text = question.options1
                 A2Button.text = question.options2
@@ -94,13 +95,13 @@ class LevelFragment : Fragment() {
                 if (isCorrect) {
                     val goodDialog = GoodFragment.newInstance(::loadNextQuestion)
                     goodDialog.show(childFragmentManager, "GoodDialog") // 顯示GoodDialog
-                    button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green)) // 將正確答案按鈕變綠
+                    button.setBackgroundResource(R.drawable.correct_button_background) // 將正確答案按鈕變綠
                     right_Answer ++
                 } else {
                     val badDialog = BadFragment.newInstance(::loadNextQuestion)
                     badDialog.show(childFragmentManager, "BadDialog") // 顯示BadDialog
-                    button.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.red)) // 點錯選項的按鈕變紅
-                    findButtonByAnswer(answer).setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.green)) // 正確答案按鈕變綠
+                    button.setBackgroundResource(R.drawable.wrong_button_background) // 點錯選項的按鈕變紅
+                    findButtonByAnswer(answer).setBackgroundResource(R.drawable.correct_button_background) // 正確答案按鈕變綠
                     wrong_Answer ++
                 }
 
@@ -139,8 +140,8 @@ class LevelFragment : Fragment() {
     private fun resetButtonColors() {
         val buttons = listOf(A1Button, A2Button, A3Button, A4Button)
         buttons.forEach { button ->
-            button.setBackgroundColor(ContextCompat.getColor(requireContext(), com.google.android.material.R.color.m3_button_background_color_selector))
             button.isEnabled = true  // 重新啟用按鈕
+            button.setBackgroundResource(R.drawable.login_textinput_4)
         }
     }
 
@@ -148,11 +149,10 @@ class LevelFragment : Fragment() {
     private fun navigateToResultPage() {
         val menuActivity = activity as? MenuActivity
         if (right_Answer > (questions?.size ?: 0)/2) {
-            menuActivity?.replaceFragment(SuccessFragment(right_Answer,levelNumber!!))
+            menuActivity?.replaceFragment(SuccessFragment(right_Answer,levelid,levelNumber,reward))
         }else{
             menuActivity?.replaceFragment(FailFragment(wrong_Answer))
         }
-        menuActivity?.showBottomNavigation()
     }
 }
 

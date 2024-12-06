@@ -8,9 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import com.example.dalleralpha1_0_0.MenuActivity
 import com.example.dalleralpha1_0_0.R
 import com.example.dalleralpha1_0_0.api.Api
+import com.example.dalleralpha1_0_0.api.Info
 import com.example.dalleralpha1_0_0.api.Information
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,11 +37,8 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) { //放一次戲的初始化操作
         super.onViewCreated(view, savedInstanceState)
-
-        // 從 API 獲取數據並更新 Toolbar 的 TextView
-
 
         // 初始化按鈕列表
         buttons = listOf(
@@ -49,26 +48,29 @@ class HomeFragment : Fragment() {
             view.findViewById(R.id.level4)
         )
 
-        updateButtonStates()
-
         // 設置按鈕點擊事件
         buttons.forEachIndexed { index, button ->
             button.setOnClickListener {
                 fetchLevelInformation("level.${index + 1}")
             }
         }
+    }
+    private fun fetchReward(){
+        Api.infoService.getInfo().enqueue(object : Callback<Info>{
+            override fun onResponse(call: Call<Info>, response: Response<Info>) {
+                if (response.isSuccessful && response.body() != null) {
+                    val info = response.body()!!
+                    val reward = view?.findViewById<TextView>(R.id.reward)
+                    reward?.text = info.score.toString()
+                } else {
+                    Log.e("fetchReward", "API 回應不正確: ${response.code()} - ${response.message()}")
+                }
+            }
 
-//        //第一關
-//        val button1 = view.findViewById<Button>(R.id.level1)
-//        button1.setOnClickListener {
-//            fetchLevelInformation("level.1")
-//        }
-//        //第二關
-//        val button2 = view.findViewById<Button>(R.id.level2)
-//        button2.setOnClickListener {
-//            fetchLevelInformation("level.2")
-//        }
-        //以此類推
+            override fun onFailure(call: Call<Info>, t: Throwable) {
+                Log.e("fetchReward", "請求失敗: $t")
+            }
+        })
     }
 
     private fun fetchLevelInformation(levelId: String) {
@@ -82,6 +84,7 @@ class HomeFragment : Fragment() {
                             putParcelable("information", information)
                             putString("levelId", levelId) // 傳遞 levelId
                             putInt("levelNumber",information.levelNumber) //傳遞levelNumber
+                            putInt("reward",information.reward) //傳遞此關通關成功會得到的鑽石數量
                         }
                         // 導航到 StartFragment 並傳遞數據
                         val startFragment = StartFragment().apply {
@@ -119,9 +122,10 @@ class HomeFragment : Fragment() {
             button.isEnabled = isUnlocked
         }
     }
-    override fun onResume() {
+    override fun onResume() { //放需要數據刷新的東西
         super.onResume()
-        updateButtonStates() // 確保返回頁面後按鈕狀態更新
+        fetchReward() // 更新 reward TextView
+        updateButtonStates() // 更新按鈕狀態
     }
 }
 
