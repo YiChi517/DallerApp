@@ -1,34 +1,21 @@
 package com.example.dalleralpha1_0_0.person
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.example.dalleralpha1_0_0.R
+import com.example.dalleralpha1_0_0.api.Api
+import com.example.dalleralpha1_0_0.api.Info
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.Locale
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PersonFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PersonFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,23 +25,63 @@ class PersonFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_person, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PersonFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PersonFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // 獲取 PiggyBankView 和 DonationTextView 的參考
+        val piggyBankView = view.findViewById<PiggyBankView>(R.id.piggy_bank_view)
+        val donationTextView = view.findViewById<TextView>(R.id.donation_amount)
+
+        // 初始分數設定
+        piggyBankView.setScore(0) // 初始分數
+
+        // 使用 API 請求來動態更新分數與捐贈金額
+        Api.infoService.getInfo().enqueue(object : Callback<Info> {
+            override fun onResponse(call: Call<Info>, response: Response<Info>) {
+                if (response.isSuccessful && response.body() != null) {
+                    val info = response.body()!!
+
+                    // 更新用戶名稱
+                    val userName = view.findViewById<TextView>(R.id.user_name)
+                    userName?.text = info.username
+
+                    // 更新 PiggyBankView 的分數
+                    val score = info.score // 從 API 獲取分數
+                    piggyBankView.setScore(score)
+
+                    // 計算捐贈金額並更新文字
+                    updateDonationAmount(piggyBankView, donationTextView)
+                } else {
+                    Log.e(
+                        "fetchReward",
+                        "API 回應不正確: ${response.code()} - ${response.message()}"
+                    )
                 }
             }
+
+            override fun onFailure(call: Call<Info>, t: Throwable) {
+                Log.e("fetchReward", "請求失敗: $t")
+            }
+        })
+
+        // 模擬分數變動
+        simulateScoreChanges(piggyBankView, donationTextView)
+    }
+
+    // 根據 PiggyBankView 的分數更新捐贈金額文字
+    private fun updateDonationAmount(piggyBankView: PiggyBankView, donationTextView: TextView) {
+        val donationAmount = piggyBankView.getDonationAmount() // 計算捐贈金額
+        donationTextView.text = String.format(
+            Locale.getDefault(),
+            "已捐贈：%.2f 新台幣",
+            donationAmount
+        )
+    }
+
+    // 模擬分數變動的測試方法
+    private fun simulateScoreChanges(piggyBankView: PiggyBankView, donationTextView: TextView) {
+        // 模擬分數
+        piggyBankView.setScore(1000)
+        updateDonationAmount(piggyBankView, donationTextView)
     }
 }
