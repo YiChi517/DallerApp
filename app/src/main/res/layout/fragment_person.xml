@@ -1,14 +1,141 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".person.PersonFragment">
+    android:orientation="vertical"
+    android:background="#333333"
+    android:padding="16dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- 頂部按鈕區域 -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="ek4bp6y xul" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="8dp">
 
-</FrameLayout>
+        <Button
+            android:id="@+id/ticket_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
+            android:text="證券"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/fire_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="26"
+            android:textSize="18sp"
+            android:textColor="#FFA500" />
+
+        <TextView
+            android:id="@+id/diamond_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="365"
+            android:textSize="18sp"
+            android:textColor="#00BFFF" />
+
+    </LinearLayout>
+
+    <!-- 上方圖片區域 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="142dp"
+        android:gravity="center"
+        android:paddingBottom="16dp">
+
+        <!-- 使用者圖片 -->
+        <ImageView
+            android:id="@+id/top_user_image"
+            android:layout_width="500dp"
+            android:layout_height="133dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_placeholder" />
+    </LinearLayout>
+
+
+    <!-- 使用者資訊區域 -->
+
+
+    <!-- 捐款資訊區域 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#333333"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <!-- 左側名字區域 -->
+
+        <!-- 右側圖片區域 -->
+        <LinearLayout
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- 使用者名字 -->
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="林舒綺"
+                android:textColor="#FFFFFF"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <!-- 使用者角色 -->
+            <TextView
+                android:id="@+id/user_role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="偵探小達"
+                android:textColor="#CCCCCC"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/user_avatar"
+            android:layout_width="80dp"
+            android:layout_height="83dp"
+            android:background="@drawable/daller_icon"
+            android:scaleType="centerCrop"
+            android:src="@drawable/daller_icon" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:layout_marginTop="16dp"
+        android:background="#2E2E2E"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- 小豬撲滿圖片 -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="已捐贈：1,200 新台幣"
+            android:textColor="#FFC107"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/piggy_bank_image"
+            android:layout_width="340dp"
+            android:layout_height="281dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/piggy_bank_icon" />
+    </LinearLayout>
+</LinearLayout>
