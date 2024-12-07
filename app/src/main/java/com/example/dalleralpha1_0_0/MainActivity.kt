@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         val pw =findViewById<EditText>(R.id.pw_content)
 
         val login=findViewById<Button>(R.id.login)
+
         login.setOnClickListener{
             //打api的時候再打開
 //            Api.retrofitService.login(LoginRequest(ac.text.toString(),pw.text.toString())).enqueue(object:retrofit2.Callback<LoginResponse>{
