@@ -52,7 +52,7 @@
         <!-- 使用者圖片 -->
         <ImageView
             android:id="@+id/top_user_image"
-            android:layout_width="500dp"
+            android:layout_width="match_parent"
             android:layout_height="133dp"
             android:scaleType="centerCrop"
             android:src="@drawable/profile_placeholder" />
