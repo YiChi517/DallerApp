@@ -4,25 +4,23 @@
     android:id="@+id/custom_toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="?attr/colorPrimary"
+    android:background="#393535"
     android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
     <!-- 可以在這裡放其他視圖，例如 TextView -->
-    <TextView
-        android:id="@+id/reward_title"
+    <ImageView
+        android:id="@+id/imageView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="鑽石圖片"
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        android:layout_marginStart="10dp"
+        android:background="@drawable/diamond" />
 
     <TextView
         android:id="@+id/reward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
         android:text="10"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textSize="18sp" />
 </androidx.appcompat.widget.Toolbar>

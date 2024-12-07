@@ -5,6 +5,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import com.example.dalleralpha1_0_0.home.HomeFragment
 import com.example.dalleralpha1_0_0.person.PersonFragment
 import com.example.dalleralpha1_0_0.practice.PracticeFragment
