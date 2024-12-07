@@ -35,6 +35,14 @@ class MainActivity : AppCompatActivity() {
         val pw =findViewById<EditText>(R.id.pw_content)
 
         val login=findViewById<Button>(R.id.login)
+        val register = findViewById<Button>(R.id.register)
+
+        register.setOnClickListener{
+            //跳去註冊
+            val intent=Intent()
+            intent.setClass(this@MainActivity,RegisterActivity::class.java)
+            startActivity(intent)
+        }
 
         login.setOnClickListener{
             //打api的時候再打開

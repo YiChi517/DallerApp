@@ -9,8 +9,9 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerHome"
         android:name="com.example.dalleralpha1_0_0.home.HomeFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

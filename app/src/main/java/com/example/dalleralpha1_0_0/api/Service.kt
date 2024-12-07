@@ -28,6 +28,12 @@ interface LoginService {
     fun login(@Body LoginRequest: LoginRequest): Call<LoginResponse>
 }
 
+interface RegisterService {
+    //註冊
+    @POST("users/register")
+    fun register(@Body RegisterRequest: RegisterRequest): Call<RegisterResponse>
+}
+
 interface LevelInformationService {
     // 獲取關卡資訊
     @GET("games/levels/{levelId}")
@@ -65,5 +71,6 @@ object Api {
     val infoService : InfoService = retrofit.create(InfoService::class.java) //打關卡資訊
     val sendToRewardService : SendToRewardService = retrofit.create(SendToRewardService::class.java) //存記錄到rewards這張表
     val updateScoreService : UpdateScoreService = retrofit.create(UpdateScoreService::class.java) //存記錄到rewards這張表
+    val registerService : RegisterService = retrofit.create(RegisterService::class.java) //註冊
 }
 
