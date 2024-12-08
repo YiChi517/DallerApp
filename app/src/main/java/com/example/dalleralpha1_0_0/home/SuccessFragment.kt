@@ -2,6 +2,8 @@ package com.example.dalleralpha1_0_0.home
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -41,22 +43,24 @@ class SuccessFragment(private val rightAnswer:Int,private var levelid:String,pri
         view.findViewById<TextView>(R.id.center).text = rightAnswer.toString()
         view.findViewById<TextView>(R.id.award_contnet).text = reward.toString()
 
-        // 點擊獲取獎勵，ToolBar的鑽石會增加(這個還沒寫)
         val back = view.findViewById<Button>(R.id.back)
         back.setOnClickListener {
             // 解鎖下一關（例如：將下一關的解鎖狀態設為 true）
             val sharedPreferences = requireContext().getSharedPreferences("GameProgress", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
             val nextLevel = currentLevel.plus(1)
             if (nextLevel <= 4) {
-                sharedPreferences.edit().putBoolean("level$nextLevel" + "Unlocked", true).apply()
+                editor.putBoolean("level${currentLevel}Cleared", true) // 当前关卡已通关
+                editor.putBoolean("level${nextLevel}Unlocked", true) // 下一关已解锁
+                editor.apply()
             }
             //存記錄到rewards這張表
-            Api.sendToRewardService.saveTorewards(levelid,UpdateRequest(levelid,reward)).enqueue(object: Callback<Void> { // 如果 API 不返回內容，可以使用 `Void` 作為泛型
+            Api.sendToRewardService.saveTorewards(levelid,UpdateRequest(levelid,reward)).enqueue(object: Callback<Void> { // API 不返回內容，使用 `Void` 作為泛型
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     if (response.isSuccessful) {
                         Log.d("sendRequestWithoutResponse", "請求成功，狀態碼: ${response.code()}")
                     } else {
-                        Log.e("sendRequestWithoutResponse", "API 回應不正確: ${response.code()} - ${response.message()}")
+                        Log.d("sendRequestWithoutResponse", "API 回應不正確: ${response.code()} - ${response.message()}")
                     }
                 }
 
@@ -74,27 +78,30 @@ class SuccessFragment(private val rightAnswer:Int,private var levelid:String,pri
                         originalReward += reward
                         updateScore(originalReward)
                     } else {
-                        Log.e("fetchReward", "API 回應不正確: ${response.code()} - ${response.message()}")
+                        Log.d("fetchReward", "API 回應不正確: ${response.code()} - ${response.message()}")
                     }
                 }
 
                 override fun onFailure(call: Call<Info>, t: Throwable) {
-                    Log.e("fetchReward", "請求失敗: $t")
+                    Log.d("fetchReward", "請求失敗: $t")
                 }
             })
             //返回HomeFragment
+            Handler(Looper.getMainLooper()).postDelayed({
             val menuActivity = activity as? MenuActivity
             menuActivity?.replaceFragment(HomeFragment())
             menuActivity?.showBottomNavigation()
+            }, 500) // 延遲 500 毫秒
         }
+
     }
     private fun updateScore(score:Int){
-        Api.updateScoreService.updateScore(UpdateScoreRequest(score)).enqueue(object: Callback<Void>{
+        Api.updateScoreService.updateScore(UpdateScoreRequest(score,levelid)).enqueue(object: Callback<Void>{
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
-                    Log.d("sendRequestWithoutResponse", "請求成功，狀態碼: ${response.code()}")
+                    Log.d("updateScore,sendRequestWithoutResponse", "請求成功，狀態碼: ${response.code()}")
                 } else {
-                    Log.e("sendRequestWithoutResponse", "API 回應不正確: ${response.code()} - ${response.message()}")
+                    Log.d("updateScore,sendRequestWithoutResponse", "API 回應不正確: ${response.code()} - ${response.message()} - ${response.body()}")
                 }
             }
 

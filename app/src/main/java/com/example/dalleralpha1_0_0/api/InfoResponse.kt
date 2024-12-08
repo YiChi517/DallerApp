@@ -9,5 +9,5 @@ data class Info(
     val email:String,
     val username:String,
     val score:Int,
-    val level:Int
+    val level:String
 ): Parcelable

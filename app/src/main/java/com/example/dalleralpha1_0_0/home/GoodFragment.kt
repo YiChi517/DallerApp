@@ -37,9 +37,9 @@ class GoodFragment : DialogFragment() {
     override fun onStart() {
         super.onStart()
         dialog?.window?.apply {
-            setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 500)
             setGravity(Gravity.BOTTOM) // 從底部彈出
-            setBackgroundDrawable(ColorDrawable(Color.GREEN)) //背景設為綠色
+            setBackgroundDrawable(ColorDrawable(Color.parseColor("#ABE87B"))) //背景色
         }
     }
 

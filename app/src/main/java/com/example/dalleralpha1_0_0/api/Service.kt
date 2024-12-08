@@ -60,7 +60,7 @@ interface SendToRewardService {
 
 interface UpdateScoreService {
     // 更新總鑽石數量至info
-    @POST("users/updateScore")
+    @POST("users/update")
     fun updateScore(@Body UpdateScoreRequest:UpdateScoreRequest):Call<Void>
 }
 
@@ -70,7 +70,7 @@ object Api {
     val levelService: LevelService = retrofit.create(LevelService::class.java) //打題目
     val infoService : InfoService = retrofit.create(InfoService::class.java) //打關卡資訊
     val sendToRewardService : SendToRewardService = retrofit.create(SendToRewardService::class.java) //存記錄到rewards這張表
-    val updateScoreService : UpdateScoreService = retrofit.create(UpdateScoreService::class.java) //存記錄到rewards這張表
+    val updateScoreService : UpdateScoreService = retrofit.create(UpdateScoreService::class.java) //更新Info
     val registerService : RegisterService = retrofit.create(RegisterService::class.java) //註冊
 }
 

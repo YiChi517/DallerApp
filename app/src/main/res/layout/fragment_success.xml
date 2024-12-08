@@ -95,21 +95,21 @@
         android:id="@+id/award"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="84dp"
+        android:layout_marginTop="60dp"
         android:text="獲得"
         android:textColor="@color/white"
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/back"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.36"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.365"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/level_start" />
 
     <TextView
         android:id="@+id/award_contnet"
         android:layout_width="31dp"
         android:layout_height="37dp"
         android:layout_marginStart="16dp"
-        android:text="20"
+        android:text=""
         android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -121,30 +121,27 @@
         android:id="@+id/receive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="60dp"
         android:text="收下你的獎勵吧!"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/award"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@id/award" />
 
     <Button
         android:id="@+id/back"
-        android:background="@drawable/login_textinput_3"
         android:layout_width="290dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/login_textinput_3"
         android:text="獲取獎勵"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/receive" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

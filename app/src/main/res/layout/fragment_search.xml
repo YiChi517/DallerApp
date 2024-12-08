@@ -5,17 +5,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#000000">
+    android:background="#231F1E"
+    android:weightSum="1">
 
     <!-- 聊天記錄區 -->
     <ScrollView
         android:id="@+id/chatScrollView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="675dp"
         android:layout_weight="1"
-        android:background="#1E1E1E"
-        android:padding="8dp"
-        android:scrollbars="vertical"
+        android:background="#231F1E"
         android:overScrollMode="never">
 
         <LinearLayout
@@ -23,8 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-
+            <!-- 此區域將顯示聊天訊息 -->
         </LinearLayout>
     </ScrollView>
 
@@ -33,35 +31,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:layout_marginBottom="16dp"
+        android:background="#231F1E"
+        android:gravity="bottom">
 
         <EditText
             android:id="@+id/messageInput"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:layout_weight="1"
-            android:hint="輸入訊息..."
             android:background="#2C2C2C"
-            android:padding="12dp"
-            android:layout_marginEnd="8dp"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#757575"
+            android:hint="輸入訊息..."
             android:imeOptions="actionSend"
             android:inputType="textPersonName"
-            android:elevation="4dp"/>
+            android:padding="12dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#757575" />
 
         <Button
             android:id="@+id/sendButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:text="發送"
             android:background="#FFC107"
             android:textColor="#000000"
             android:padding="12dp"
-            android:elevation="6dp"
             android:textStyle="bold"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="0dp"/>
     </LinearLayout>
 </LinearLayout>

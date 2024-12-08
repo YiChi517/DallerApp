@@ -63,14 +63,15 @@ class HomeFragment : Fragment() {
                     val reward = view?.findViewById<TextView>(R.id.reward)
                     reward?.text = info.score.toString()
                 } else {
-                    Log.e("fetchReward", "API 回應不正確: ${response.code()} - ${response.message()}")
+                    Log.d("fetch&Reward", "API 回應不正確: ${response.code()} - ${response.message()}")
                 }
             }
 
             override fun onFailure(call: Call<Info>, t: Throwable) {
-                Log.e("fetchReward", "請求失敗: $t")
+                Log.d("fetch&Reward", "請求失敗: $t")
             }
         })
+        Log.d("HomeFragment", "fetchReward called")
     }
 
     private fun fetchLevelInformation(levelId: String) {
@@ -98,13 +99,13 @@ class HomeFragment : Fragment() {
                         Log.d("fetchLevelInformation", "成功獲取關卡資訊: {$information}")
                     } else {
                         // 如果 questions 為 null，顯示錯誤訊息
-                        Log.e("API Error", "No questions found in response")
+                        Log.d("API Error", "No questions found in response")
                     }
                 } else {
                     // 處理API錯誤
                     val errorCode = response.code()
                     val errorBody = response.errorBody()?.string()
-                    Log.e("fetchLevelInformation", "Error code: $errorCode, Error body: $errorBody")
+                    Log.d("fetchLevelInformation", "Error code: $errorCode, Error body: $errorBody")
                 }
             }
             override fun onFailure(call: Call<Information>, t: Throwable) {
@@ -118,14 +119,43 @@ class HomeFragment : Fragment() {
 
         // 動態檢查各關卡的解鎖狀態
         buttons.forEachIndexed { index, button ->
+            val isCleared = sharedPreferences.getBoolean("level${index + 1}Cleared", false)
             val isUnlocked = sharedPreferences.getBoolean("level${index + 1}Unlocked", index == 0)
-            button.isEnabled = isUnlocked
+            button.isEnabled = isUnlocked // 更新是否可点击
+
+            // 更新按钮背景
+            if (isCleared) {
+                button.setBackgroundResource(R.drawable.section_btm_y) // 替换为通关背景
+            } else if (isUnlocked) {
+                button.setBackgroundResource(R.drawable.section_btm_gray) // 解锁状态背景
+            }
+//            else {
+//                button.setBackgroundResource(R.drawable.section_btm_gray) // 未解锁状态背景
+//            }
         }
+
     }
     override fun onResume() { //放需要數據刷新的東西
         super.onResume()
         fetchReward() // 更新 reward TextView
         updateButtonStates() // 更新按鈕狀態
+        updateClearedButtonDrawable() // 更新已通关按钮的背景
+        Log.d("HomeFragment", "Calling updateClearedButtonDrawable...")
+    }
+    private fun updateClearedButtonDrawable() {
+        val sharedPreferences = requireContext().getSharedPreferences("GameProgress", Context.MODE_PRIVATE)
+        val isLevelCleared = sharedPreferences.getBoolean("levelCleared", false)
+        val clearedLevelNumber = sharedPreferences.getInt("clearedLevelNumber", -1)
+
+        if (isLevelCleared && clearedLevelNumber > 0 && clearedLevelNumber <= totalLevels) {
+            val clearedButton = buttons[clearedLevelNumber - 1] // 找到对应的按钮
+            clearedButton.setBackgroundResource(R.drawable.section_btm_y) // 修改按钮的 drawable
+
+            // 如果不需要保留通关标记，可以重置状态
+            val editor = sharedPreferences.edit()
+            editor.putBoolean("levelCleared", false)
+            editor.apply()
+        }
     }
 }
 

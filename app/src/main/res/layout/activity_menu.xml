@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#231F1E"
+    android:orientation="vertical"
     tools:context=".MenuActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerHome"
         android:name="com.example.dalleralpha1_0_0.home.HomeFragment"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        app:layout_constraintBottom_toTopOf="@+id/navigation"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="#231F1E"
+        app:layout_constraintEnd_toStartOf="@id/navigation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,13 +23,13 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="#34302D"
+        app:itemIconSize="40dp"
+        app:itemIconTint="@drawable/selector_color"
+        app:itemPaddingBottom="20dp"
+        app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:labelVisibilityMode="unlabeled"
-        app:itemIconSize="40dp"
-        app:itemIconTint="@drawable/selector_color"
-        app:itemPaddingBottom="10dp"
-        app:menu="@menu/menu"/>
+        app:menu="@menu/menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

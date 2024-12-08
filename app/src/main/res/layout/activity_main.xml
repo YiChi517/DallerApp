@@ -9,13 +9,13 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/register"
-        android:layout_width="125dp"
+        android:id="@+id/login"
+        android:layout_width="124dp"
         android:layout_height="52dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="64dp"
-        android:background="@drawable/login_textinput_2"
-        android:text="註冊"
+        android:background="@drawable/login_textinput_4"
+        android:text="登入"
         android:textAlignment="center"
         android:textColor="#865534"
         android:textSize="20dp"
@@ -24,13 +24,13 @@
         app:layout_constraintTop_toBottomOf="@+id/pw" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/register"
         android:layout_width="125dp"
         android:layout_height="52dp"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="120dp"
         android:background="@drawable/login_textinput_2"
-        android:text="登入"
+        android:text="註冊"
         android:textAlignment="center"
         android:textColor="#865534"
         android:textSize="20dp"

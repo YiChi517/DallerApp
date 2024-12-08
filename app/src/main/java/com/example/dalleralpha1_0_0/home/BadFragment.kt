@@ -38,9 +38,9 @@ class BadFragment : DialogFragment() {
     override fun onStart() {
         super.onStart()
         dialog?.window?.apply {
-            setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 500)
             setGravity(Gravity.BOTTOM) // 從底部彈出
-            setBackgroundDrawable(ColorDrawable(Color.RED)) //背景設為紅色
+            setBackgroundDrawable(ColorDrawable(Color.parseColor("#FFAE83"))) //背景設為紅色
         }
     }
 

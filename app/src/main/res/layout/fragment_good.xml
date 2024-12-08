@@ -9,27 +9,29 @@
         android:id="@+id/good"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="你太厲害啦!"
+        android:layout_marginTop="24dp"
+        android:text="你太厲害啦 !"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="50dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="10dp"
+        android:textColor="#427718"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="50dp"/>
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/next"
-        android:layout_width="wrap_content"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:text="繼續"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/good"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/login_textinput_5"
+        android:text="繼 續"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="50dp" />
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/good" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

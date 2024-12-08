@@ -64,13 +64,14 @@
         android:id="@+id/star"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="44dp"
         android:text="難度"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.339"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/content" />
 
     <TextView
@@ -179,16 +180,16 @@
         android:layout_width="318dp"
         android:layout_height="76dp"
         android:layout_marginStart="40dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="120dp"
         android:background="@drawable/login_textinput_3"
         android:text="開始關卡"
-        android:textStyle="bold"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/award" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
