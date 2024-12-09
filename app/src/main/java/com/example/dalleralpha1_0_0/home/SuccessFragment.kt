@@ -78,12 +78,12 @@ class SuccessFragment(private val rightAnswer:Int,private var levelid:String,pri
                         originalReward += reward
                         updateScore(originalReward)
                     } else {
-                        Log.d("fetchReward", "API 回應不正確: ${response.code()} - ${response.message()}")
+                        Log.d("fetchReward", "更新分數成功: ${response.code()} - ${response.message()}")
                     }
                 }
 
                 override fun onFailure(call: Call<Info>, t: Throwable) {
-                    Log.d("fetchReward", "請求失敗: $t")
+                    Log.d("fetchReward", "更新分數失敗: $t")
                 }
             })
             //返回HomeFragment

@@ -12,15 +12,28 @@
         android:id="@+id/start"
         android:layout_width="125dp"
         android:layout_height="52dp"
-        android:layout_marginTop="54dp"
+        android:layout_marginTop="52dp"
         android:background="@drawable/login_textinput_2"
-        android:text="開始註冊"
+        android:text="註冊"
         android:textAlignment="center"
         android:textColor="#865534"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/pw_content"
+        app:layout_constraintTop_toBottomOf="@+id/pw" />
+
+    <Button
+        android:id="@+id/backtologin"
+        android:layout_width="125dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/login_textinput_4"
+        android:text="返回"
+        android:textAlignment="center"
+        android:textColor="#865534"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/pw"
         app:layout_constraintTop_toBottomOf="@+id/pw" />
 
     <TextView

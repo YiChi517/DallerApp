@@ -8,15 +8,21 @@
     android:orientation="vertical"
     tools:context=".MenuActivity">
 
+    <!-- Include the toolbar -->
+    <include
+        android:id="@+id/custom_toolbar"
+        layout="@layout/custom_toolbar" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerHome"
         android:name="com.example.dalleralpha1_0_0.home.HomeFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="#231F1E"
-        app:layout_constraintEnd_toStartOf="@id/navigation"
+        app:layout_constraintBottom_toTopOf="@id/navigation"
+        app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/custom_toolbar" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation"

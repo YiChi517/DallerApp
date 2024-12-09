@@ -29,6 +29,7 @@ class RegisterActivity : AppCompatActivity(){
         val pw =findViewById<EditText>(R.id.pw_content)
 
         val register= findViewById<Button>(R.id.start)
+        val back = findViewById<Button>(R.id.backtologin)
 
         register.setOnClickListener{
             //打api的時候再打開
@@ -65,6 +66,11 @@ class RegisterActivity : AppCompatActivity(){
                 }
 
             })
+        }
+        back.setOnClickListener{
+            val intent= Intent()
+            intent.setClass(this@RegisterActivity,MainActivity::class.java)
+            startActivity(intent)
         }
     }
 }
