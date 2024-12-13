@@ -81,7 +81,9 @@ class SuccessFragment(private val rightAnswer:Int,private var levelid:String,pri
                         })
                         Log.d("sendRequestWithoutResponse", "請求成功，狀態碼: ${response.code()}")
                     } else {
-                        Toast.makeText(context,"您已通關，故不會獲得獎勵",Toast.LENGTH_LONG).show()
+                        if (response.code()== 500) {
+                            Toast.makeText(context, "您已通關，故不會獲得獎勵", Toast.LENGTH_LONG).show()
+                        }
                         Log.d("sendRequestWithoutResponse", "API 回應不正確: ${response.code()} - ${response.message()}")
                     }
                 }
