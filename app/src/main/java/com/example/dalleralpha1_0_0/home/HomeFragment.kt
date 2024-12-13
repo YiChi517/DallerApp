@@ -22,7 +22,7 @@ import retrofit2.Response
 class HomeFragment : Fragment() {
 
     private lateinit var buttons: List<Button>
-    private val totalLevels = 4 // 假設有 4 關
+    private val totalLevels = 10 // 假設有 4 關
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +49,13 @@ class HomeFragment : Fragment() {
             view.findViewById(R.id.level1),
             view.findViewById(R.id.level2),
             view.findViewById(R.id.level3),
-            view.findViewById(R.id.level4)
+            view.findViewById(R.id.level4),
+            view.findViewById(R.id.level5),
+            view.findViewById(R.id.level6),
+            view.findViewById(R.id.level7),
+            view.findViewById(R.id.level8),
+            view.findViewById(R.id.level9),
+            view.findViewById(R.id.level10)
         )
 
         // 設置按鈕點擊事件

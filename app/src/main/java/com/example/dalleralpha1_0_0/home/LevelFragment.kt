@@ -65,7 +65,13 @@ class LevelFragment(private var levelid:String,private var reward:Int) : Fragmen
             val menuActivity = activity as? MenuActivity
             menuActivity?.replaceFragment(HomeFragment())
             menuActivity?.showBottomNavigation()
+            menuActivity?.showToolbar()
         }
+    }
+
+    override fun onResume() { //放需要數據刷新的東西
+        super.onResume()
+        (activity as? MenuActivity)?.hideToolbar()
     }
 
     //顯示題目內容

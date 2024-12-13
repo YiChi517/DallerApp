@@ -25,6 +25,7 @@ class MenuActivity : AppCompatActivity() {
 
     private lateinit var rewardTextView: TextView
     private lateinit var levelTextView: TextView
+    private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +33,7 @@ class MenuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_menu)
 
         // 初始化 Toolbar 的 TextView
-        val toolbar = findViewById<Toolbar>(R.id.custom_toolbar)
+        toolbar = findViewById<Toolbar>(R.id.custom_toolbar)
         setSupportActionBar(toolbar)
         rewardTextView = toolbar.findViewById(R.id.reward)
         levelTextView = toolbar.findViewById(R.id.level)
@@ -118,6 +119,16 @@ class MenuActivity : AppCompatActivity() {
     // 隱藏 BottomNavigationView
     fun hideBottomNavigation() {
         findViewById<BottomNavigationView>(R.id.navigation).visibility = View.GONE
+    }
+
+    // 方法：隱藏 Toolbar
+    fun hideToolbar() {
+        toolbar.visibility = View.GONE
+    }
+
+    // 方法：顯示 Toolbar
+    fun showToolbar() {
+        toolbar.visibility = View.VISIBLE
     }
 }
 

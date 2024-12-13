@@ -36,7 +36,13 @@ class FailFragment(val wrongAnswer:Int) : Fragment() {
             val menuActivity = activity as? MenuActivity
             menuActivity?.replaceFragment(HomeFragment())
             menuActivity?.showBottomNavigation()
+            menuActivity?.showToolbar()
         }
+    }
+
+    override fun onResume() { //放需要數據刷新的東西
+        super.onResume()
+        (activity as? MenuActivity)?.hideToolbar()
     }
 
 }

@@ -80,13 +80,17 @@ class StartFragment : Fragment() {
             }
         }
 
-
         //取得第一關level.1的題目
         val start = view.findViewById<Button>(R.id.start)
         Log.d("ViewType", "start is of type: ${start::class.java.name}")
         start.setOnClickListener {
             fetchQuestions(levelId!!)
         }
+    }
+
+    override fun onResume() { //放需要數據刷新的東西
+        super.onResume()
+        (activity as? MenuActivity)?.hideToolbar()
     }
 
     private fun fetchQuestions(levelId: String) {
