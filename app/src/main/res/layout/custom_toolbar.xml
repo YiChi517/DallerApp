@@ -7,7 +7,7 @@
     android:background="#393535"
     android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
-    <!-- 可以在這裡放其他視圖，例如 TextView -->
+    <!-- 左侧图片或图标 -->
     <ImageView
         android:id="@+id/imageView13"
         android:layout_width="wrap_content"
@@ -15,6 +15,7 @@
         android:layout_marginStart="10dp"
         android:background="@drawable/diamond" />
 
+    <!-- 中间的文本 -->
     <TextView
         android:id="@+id/reward"
         android:layout_width="wrap_content"
@@ -23,4 +24,29 @@
         android:text="10"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
+
+    <!-- 右上角圆形大头贴 -->
+    <FrameLayout
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="end|center_vertical"
+        android:layout_marginEnd="10dp">
+
+        <!-- 白色背景 -->
+        <ImageView
+            android:id="@+id/background_circle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/circle_background" />
+
+        <!-- 图片本体 -->
+        <ImageView
+            android:id="@+id/corner_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/daller"
+            android:background="@drawable/circle_background"
+            android:clipToOutline="true" />
+    </FrameLayout>
 </androidx.appcompat.widget.Toolbar>

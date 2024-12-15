@@ -1,5 +1,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,34 +12,27 @@
         layout="@layout/custom_toolbar" />
 
     <!-- 上方圖片區域 -->
-    <LinearLayout
+    <ImageView
+        android:id="@+id/top_image"
         android:layout_width="match_parent"
-        android:layout_height="142dp"
-        android:background="@drawable/login_logo"
-        android:gravity="center"
-        android:paddingBottom="16dp"/>
+        android:layout_height="182dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/daller" />
 
 
     <!-- 使用者資訊區域 -->
-
-
-    <!-- 捐款資訊區域 -->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#333333"
+        android:background="#444444"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="16dp">
 
         <!-- 左側名字區域 -->
-
-        <!-- 右側圖片區域 -->
         <LinearLayout
-            android:layout_width="10dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:orientation="vertical">
 
             <!-- 使用者名字 -->
@@ -46,31 +40,37 @@
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="林舒綺"
+                android:text=""
                 android:textColor="#FFFFFF"
-                android:textSize="40sp"
-                android:textStyle="bold" />
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
 
             <!-- 使用者角色 -->
             <TextView
                 android:id="@+id/user_role"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 android:text="偵探小達"
                 android:textColor="#CCCCCC"
                 android:textSize="16sp" />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/user_avatar"
-            android:layout_width="80dp"
-            android:layout_height="83dp"
-            android:background="@drawable/login_logo"
-            android:scaleType="centerCrop"
-            android:src="@drawable/login_logo" />
+        <!-- 右側使用者圖片區域 -->
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/edit"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="fitStart"
+            android:layout_gravity="top"
+            android:layout_marginStart="16dp"
+            />
     </LinearLayout>
 
+    <!-- 捐款資訊區域 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="360dp"
@@ -79,25 +79,23 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- 小豬撲滿圖片 -->
-
+        <!-- 捐款金額顯示 -->
         <TextView
             android:id="@+id/donation_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="已捐贈：0.00 新台幣"
+            android:text="已轉讓：0.00 新台幣"
             android:textColor="#FFC107"
             android:textSize="20sp"
-            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:textStyle="bold" />
 
-
+        <!-- 小豬撲滿圖片 -->
         <com.example.dalleralpha1_0_0.person.PiggyBankView
             android:id="@+id/piggy_bank_view"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="16dp"/>
-
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp" />
     </LinearLayout>
 </LinearLayout>

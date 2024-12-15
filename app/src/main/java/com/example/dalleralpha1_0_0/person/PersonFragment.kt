@@ -1,12 +1,13 @@
 package com.example.dalleralpha1_0_0.person
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.*
+import androidx.fragment.app.Fragment
 import com.example.dalleralpha1_0_0.R
 import com.example.dalleralpha1_0_0.api.Api
 import com.example.dalleralpha1_0_0.api.Info
@@ -32,6 +33,12 @@ class PersonFragment : Fragment() {
         val piggyBankView = view.findViewById<PiggyBankView>(R.id.piggy_bank_view)
         val donationTextView = view.findViewById<TextView>(R.id.donation_amount)
 
+        // 獲取 ImageButton 並設置點擊事件
+        val editButton = view.findViewById<ImageButton>(R.id.imageButton2)
+        editButton.setOnClickListener {
+            showEditDialog(view)
+        }
+
         // 初始分數設定
         piggyBankView.setScore(0) // 初始分數
 
@@ -51,6 +58,7 @@ class PersonFragment : Fragment() {
 
                     // 計算捐贈金額並更新文字
                     updateDonationAmount(piggyBankView, donationTextView)
+                    Log.d("API Response", "Username: ${info.username}")
                 } else {
                     Log.e(
                         "fetchReward",
@@ -63,9 +71,6 @@ class PersonFragment : Fragment() {
                 Log.e("fetchReward", "請求失敗: $t")
             }
         })
-
-        // 模擬分數變動
-        simulateScoreChanges(piggyBankView, donationTextView)
     }
 
     // 根據 PiggyBankView 的分數更新捐贈金額文字
@@ -78,10 +83,86 @@ class PersonFragment : Fragment() {
         )
     }
 
-    // 模擬分數變動的測試方法
-    private fun simulateScoreChanges(piggyBankView: PiggyBankView, donationTextView: TextView) {
-        // 模擬分數
-        piggyBankView.setScore(1000)
-        updateDonationAmount(piggyBankView, donationTextView)
+    // 顯示編輯對話框的方法
+    private fun showEditDialog(view: View) {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_edit_user, null)
+
+        // 獲取對話框中的元件
+        val nameEditText = dialogView.findViewById<EditText>(R.id.edit_user_name)
+        val roleGrid = dialogView.findViewById<GridLayout>(R.id.role_image_grid)
+
+        // 預設填入目前的使用者名稱
+        val currentNameTextView = view.findViewById<TextView>(R.id.user_name)
+        val currentUserName = currentNameTextView.text.toString()
+        nameEditText.setText(currentUserName)
+
+        var selectedRoleId: Int? = null // 用於記錄選擇的角色 ID
+
+        // 引用上方大圖片和右上角小圖示
+        val topImageView = view.findViewById<ImageView>(R.id.top_image) // 上方圖片
+        val cornerImageView = view.findViewById<ImageView>(R.id.corner_image) // 右上角小圖示
+
+        // 設置每個圖片的點擊事件
+        for (i in 0 until roleGrid.childCount) {
+            val roleImage = roleGrid.getChildAt(i) as ImageView
+
+            // 保存原始的 padding 和 margin
+            val originalPadding = roleImage.paddingTop
+            val originalLayoutParams = roleImage.layoutParams as ViewGroup.MarginLayoutParams
+
+            roleImage.setOnClickListener {
+                // 清除所有圖片的選中背景並恢復原始大小
+                for (j in 0 until roleGrid.childCount) {
+                    val img = roleGrid.getChildAt(j) as ImageView
+                    img.background = null
+                    img.setPadding(originalPadding, originalPadding, originalPadding, originalPadding)
+                    val params = img.layoutParams as ViewGroup.MarginLayoutParams
+                    params.setMargins(originalLayoutParams.leftMargin, originalLayoutParams.topMargin, originalLayoutParams.rightMargin, originalLayoutParams.bottomMargin)
+                    img.layoutParams = params
+                }
+
+                // 設置當前選中圖片的背景
+                roleImage.setBackgroundResource(R.drawable.login_textinput)
+                selectedRoleId = roleImage.id
+            }
+        }
+
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setView(dialogView)
+            .setTitle("編輯使用者資訊")
+            .setPositiveButton("確認") { dialog, _ ->
+                // 獲取使用者輸入的名稱，若為空則保留原本名稱
+                val newName = nameEditText.text.toString().takeIf { it.isNotBlank() } ?: currentUserName
+
+                // 根據選擇的角色 ID 獲取角色名稱和圖片
+                val (selectedRole, selectedImageRes) = when (selectedRoleId) {
+                    R.id.role_1 -> "偵探小達" to R.drawable.daller
+                    R.id.role_2 -> "紳士嘶嘶" to R.drawable.snake
+                    R.id.role_3 -> "博士芙芙" to R.drawable.bat
+                    R.id.role_4 -> "特務阿來" to R.drawable.frog
+                    R.id.role_5 -> "間蝶Q摸" to R.drawable.butterfly
+                    else -> view.findViewById<TextView>(R.id.user_role).text.toString() to null
+                }
+
+                // 更新 UI
+                currentNameTextView.text = newName
+                val userRoleTextView = view.findViewById<TextView>(R.id.user_role)
+                userRoleTextView.text = selectedRole
+
+                // 更新圖片
+                selectedImageRes?.let {
+                    topImageView.setImageResource(it) // 上方大圖片
+                    cornerImageView.setImageResource(it) // 右上角小圖示
+                }
+
+                dialog.dismiss()
+            }
+            .setNegativeButton("取消") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
     }
+
+
 }
