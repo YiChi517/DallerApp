@@ -1,7 +1,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="#FFFFFF" /> <!-- 背景颜色，可根据需要更改 -->
     <size
-        android:width="60dp"
-        android:height="60dp" />
+        android:width="20dp"
+        android:height="20dp" />
     <corners android:radius="30dp" /> <!-- 圆角半径设置为宽度或高度的一半 -->
 </shape>
