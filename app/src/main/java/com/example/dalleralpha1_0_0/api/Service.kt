@@ -64,6 +64,12 @@ interface UpdateScoreService {
     fun updateScore(@Body UpdateScoreRequest:UpdateScoreRequest):Call<Void>
 }
 
+interface UpdateNameService {
+    // 更新名字頭貼至info
+    @POST("users/updateName")
+    fun updateNamePhoto(@Body UpdateNameRequest:UpdateNameRequest):Call<Void>
+}
+
 object Api {
     val retrofitService: LoginService = retrofit.create(LoginService::class.java) //登入
     val levelInformationService: LevelInformationService = retrofit.create(LevelInformationService::class.java) //打關卡資訊
@@ -72,5 +78,6 @@ object Api {
     val sendToRewardService : SendToRewardService = retrofit.create(SendToRewardService::class.java) //存記錄到rewards這張表
     val updateScoreService : UpdateScoreService = retrofit.create(UpdateScoreService::class.java) //更新Info
     val registerService : RegisterService = retrofit.create(RegisterService::class.java) //註冊
+    val updateNameService : UpdateNameService = retrofit.create(UpdateNameService::class.java) //更新姓名頭貼
 }
 

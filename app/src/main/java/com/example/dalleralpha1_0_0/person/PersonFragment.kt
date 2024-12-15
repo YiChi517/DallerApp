@@ -14,6 +14,9 @@ import com.example.dalleralpha1_0_0.MainActivity
 import com.example.dalleralpha1_0_0.R
 import com.example.dalleralpha1_0_0.api.Api
 import com.example.dalleralpha1_0_0.api.Info
+import com.example.dalleralpha1_0_0.api.RegisterRequest
+import com.example.dalleralpha1_0_0.api.RegisterResponse
+import com.example.dalleralpha1_0_0.api.UpdateNameRequest
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,6 +24,9 @@ import java.util.Locale
 
 class PersonFragment : Fragment() {
 
+    private  lateinit var cornerImageView :ImageView
+    private  lateinit var topImageView :ImageView
+    private  lateinit var userRoleTextView :TextView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,6 +37,12 @@ class PersonFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Toolbar 內的右上角小圖示
+        cornerImageView = activity?.findViewById(R.id.corner_image) ?: throw IllegalStateException("Activity is null")
+        // 引用上方大圖片
+        topImageView = view.findViewById(R.id.top_image)
+        //角色名稱
+        userRoleTextView = view.findViewById(R.id.user_role)
 
         // 獲取 PiggyBankView 和 DonationTextView 的參考
         val piggyBankView = view.findViewById<PiggyBankView>(R.id.piggy_bank_view)
@@ -54,6 +66,18 @@ class PersonFragment : Fragment() {
                     // 更新用戶名稱
                     val userName = view.findViewById<TextView>(R.id.user_name)
                     userName?.text = info.username
+
+                    //更新角色名稱(小字)
+                    userRoleTextView.text=info.headphoto
+
+                    // 更新大圖片
+                    when (info.headphoto) {
+                        "偵探小達" -> topImageView.setImageResource(R.drawable.daller)
+                        "紳士嘶嘶" -> topImageView.setImageResource(R.drawable.snake)
+                        "特務阿來" -> topImageView.setImageResource(R.drawable.frog)
+                        "博士芙芙" -> topImageView.setImageResource(R.drawable.bat)
+                        "間蝶Q摸" -> topImageView.setImageResource(R.drawable.butterfly)
+                    }
 
                     // 更新 PiggyBankView 的分數
                     val score = info.score // 從 API 獲取分數
@@ -115,11 +139,7 @@ class PersonFragment : Fragment() {
 
         var selectedRoleId: Int? = null // 用於記錄選擇的角色 ID
 
-        // Toolbar 內的右上角小圖示
-        val cornerImageView = activity?.findViewById<ImageView>(R.id.corner_image)
 
-        // 引用上方大圖片
-        val topImageView = view.findViewById<ImageView>(R.id.top_image)
 
         // 設置每個圖片的點擊事件
         for (i in 0 until roleGrid.childCount) {
@@ -170,16 +190,33 @@ class PersonFragment : Fragment() {
 
                 // 更新 UI
                 currentNameTextView.text = newName
-                val userRoleTextView = view.findViewById<TextView>(R.id.user_role)
                 userRoleTextView.text = selectedRole
 
                 // 更新圖片
                 selectedImageRes?.let {
                     topImageView.setImageResource(it) // 上方大圖片
-                    cornerImageView?.setImageResource(it) // Toolbar 右上角小圖示
+                    cornerImageView.setImageResource(it) // Toolbar 右上角小圖示
                 }
 
                 dialog.dismiss()
+
+                Api.updateNameService.updateNamePhoto(UpdateNameRequest(newName,selectedRole)).enqueue(object:retrofit2.Callback<Void>{
+                    override fun onResponse(call: Call<Void>, response: Response<Void>)
+                    {
+                        if (response.isSuccessful){
+                            Toast.makeText(context,"更新成功",Toast.LENGTH_SHORT).show()
+                        }
+                        else{
+                            Toast.makeText(context,"更新失敗",Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Void>, t: Throwable) {
+                        Toast.makeText(context,"Api更新失敗",Toast.LENGTH_SHORT).show()
+                        Log.e("fail",t.toString())
+                    }
+
+                })
             }
             .setNegativeButton("取消") { dialog, _ ->
                 dialog.dismiss()

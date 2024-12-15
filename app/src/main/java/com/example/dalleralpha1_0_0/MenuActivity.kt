@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.Window
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -26,6 +27,7 @@ class MenuActivity : AppCompatActivity() {
     private lateinit var rewardTextView: TextView
     private lateinit var levelTextView: TextView
     private lateinit var toolbar: Toolbar
+    private  lateinit var cornerImageView : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +39,7 @@ class MenuActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         rewardTextView = toolbar.findViewById(R.id.reward)
         levelTextView = toolbar.findViewById(R.id.level)
+        cornerImageView = toolbar.findViewById(R.id.corner_image)
 
         // 可選：如果需要隱藏標題
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -66,6 +69,7 @@ class MenuActivity : AppCompatActivity() {
                 if (response.isSuccessful && response.body() != null) {
                     val info = response.body()!!
                     updateToolbarReward(info.score,info.level) // 更新 Toolbar
+                    getPhoto(info.headphoto)
                 } else {
                     Log.e("MenuActivity", "API 回應不正確: ${response.code()} - ${response.message()}")
                 }
@@ -109,6 +113,15 @@ class MenuActivity : AppCompatActivity() {
             .replace(R.id.fragmentContainerHome, fragment) // 替換 Fragment
             .addToBackStack(null) // 添加到回退堆疊，允許返回上一個 Fragment
             .commit()
+    }
+    private fun getPhoto(headphoto:String){
+        when (headphoto){
+            "偵探小達" -> cornerImageView.setImageResource(R.drawable.daller)
+            "紳士嘶嘶" -> cornerImageView.setImageResource(R.drawable.snake)
+            "特務阿來" -> cornerImageView.setImageResource(R.drawable.frog)
+            "博士芙芙" -> cornerImageView.setImageResource(R.drawable.bat)
+            "間蝶Q摸" -> cornerImageView.setImageResource(R.drawable.butterfly)
+        }
     }
 
     // 顯示 BottomNavigationView
