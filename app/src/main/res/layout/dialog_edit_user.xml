@@ -1,0 +1,79 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- 輸入使用者名稱 -->
+    <EditText
+        android:id="@+id/edit_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="輸入新的使用者名稱" />
+
+
+    <!-- 選擇角色 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="選擇角色"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal" />
+
+    <GridLayout
+        android:id="@+id/role_image_grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:layout_marginTop="8dp">
+
+        <!-- 每個角色圖片 -->
+        <ImageView
+            android:id="@+id/role_1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/daller"
+            android:layout_margin="8dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="角色 1" />
+
+        <ImageView
+            android:id="@+id/role_2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/snake"
+            android:layout_margin="8dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="角色 2"/>
+
+        <ImageView
+            android:id="@+id/role_3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/bat"
+            android:layout_margin="8dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="角色 3"/>
+
+        <ImageView
+            android:id="@+id/role_4"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/frog"
+            android:layout_margin="8dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="角色 4"/>
+
+        <ImageView
+            android:id="@+id/role_5"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/butterfly"
+            android:layout_margin="8dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="角色 5"/>
+    </GridLayout>
+</LinearLayout>
