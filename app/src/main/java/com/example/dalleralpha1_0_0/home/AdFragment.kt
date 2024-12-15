@@ -85,7 +85,7 @@ class AdFragment : DialogFragment() {
         super.onStart()
         dialog?.window?.apply {
             setLayout(ViewGroup.LayoutParams.MATCH_PARENT,900)
-            setBackgroundDrawable(ColorDrawable(Color.parseColor("#ABE87B"))) // 设置背景颜色
+            setBackgroundDrawable(ColorDrawable(Color.parseColor("#878787"))) // 设置背景颜色
         }
     }
 }

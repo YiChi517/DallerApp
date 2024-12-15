@@ -42,16 +42,16 @@
 
     <ImageView
         android:id="@+id/imageView15"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:background="@drawable/treasure_gray" />
+        android:background="@drawable/crown" />
 
     <TextView
         android:id="@+id/season"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="10dp"
         android:text="S1"
         android:textColor="@android:color/white"
         android:textSize="24sp" />
