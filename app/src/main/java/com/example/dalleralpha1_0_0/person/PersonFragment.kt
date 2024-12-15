@@ -1,6 +1,8 @@
 package com.example.dalleralpha1_0_0.person
 
 import android.app.AlertDialog
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import com.example.dalleralpha1_0_0.MainActivity
 import com.example.dalleralpha1_0_0.R
 import com.example.dalleralpha1_0_0.api.Api
 import com.example.dalleralpha1_0_0.api.Info
@@ -71,6 +74,20 @@ class PersonFragment : Fragment() {
                 Log.e("fetchReward", "請求失敗: $t")
             }
         })
+        val logout = view.findViewById<Button>(R.id.logout)
+        logout.setOnClickListener{
+            logout()
+        }
+    }
+    private fun logout() {
+        // 清除 SharedPreferences 中的用戶數據
+        val sharedPreferences = requireContext().getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+        sharedPreferences.edit().clear().apply()
+
+        // 啟動 MainActivity，並清空返回棧
+        val intent = Intent(requireContext(), MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 
     // 根據 PiggyBankView 的分數更新捐贈金額文字

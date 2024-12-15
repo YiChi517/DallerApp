@@ -1,98 +1,115 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#333333"
-    android:padding="16dp">
+    android:background="#231F1E">
 
-
-    <!-- 上方圖片區域 -->
-    <ImageView
-        android:id="@+id/top_image"
-        android:layout_width="match_parent"
-        android:layout_height="182dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/daller" />
-
-
-    <!-- 使用者資訊區域 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#444444"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="16dp">
-
-        <!-- 左側名字區域 -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- 使用者名字 -->
-            <TextView
-                android:id="@+id/user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="#FFFFFF"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
-
-            <!-- 使用者角色 -->
-            <TextView
-                android:id="@+id/user_role"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="偵探小達"
-                android:textColor="#CCCCCC"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <!-- 右側使用者圖片區域 -->
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="0dp"
-            android:layout_height="24dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/edit"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:scaleType="fitStart"
-            android:layout_gravity="top"
-            android:layout_marginStart="16dp"
-            />
-    </LinearLayout>
-
-    <!-- 捐款資訊區域 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="360dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
+        android:background="#333333"
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- 捐款金額顯示 -->
-        <TextView
-            android:id="@+id/donation_amount"
-            android:layout_width="wrap_content"
+
+        <!-- 上方圖片區域 -->
+        <ImageView
+            android:id="@+id/top_image"
+            android:layout_width="match_parent"
+            android:layout_height="182dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/daller" />
+
+
+        <!-- 使用者資訊區域 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#444444"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <!-- 左側名字區域 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- 使用者名字 -->
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <!-- 使用者角色 -->
+                <TextView
+                    android:id="@+id/user_role"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="偵探小達"
+                    android:textColor="#CCCCCC"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- 右側使用者圖片區域 -->
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_gravity="top"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/edit" />
+        </LinearLayout>
+
+        <!-- 捐款資訊區域 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="360dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 捐款金額顯示 -->
+            <TextView
+                android:id="@+id/donation_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
+                android:text="已轉讓：0.00 新台幣"
+                android:textColor="#FFC107"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <!-- 小豬撲滿圖片 -->
+            <com.example.dalleralpha1_0_0.person.PiggyBankView
+                android:id="@+id/piggy_bank_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="已轉讓：0.00 新台幣"
-            android:textColor="#FFC107"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/login_textinput_4"
+            android:text="登 出"
             android:textSize="20sp"
-            android:layout_marginBottom="16dp"
             android:textStyle="bold" />
-
-        <!-- 小豬撲滿圖片 -->
-        <com.example.dalleralpha1_0_0.person.PiggyBankView
-            android:id="@+id/piggy_bank_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="16dp" />
     </LinearLayout>
-</LinearLayout>
+</ScrollView>
