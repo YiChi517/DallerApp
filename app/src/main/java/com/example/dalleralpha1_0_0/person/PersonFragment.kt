@@ -98,9 +98,11 @@ class PersonFragment : Fragment() {
 
         var selectedRoleId: Int? = null // 用於記錄選擇的角色 ID
 
-        // 引用上方大圖片和右上角小圖示
-        val topImageView = view.findViewById<ImageView>(R.id.top_image) // 上方圖片
-        val cornerImageView = view.findViewById<ImageView>(R.id.corner_image) // 右上角小圖示
+        // Toolbar 內的右上角小圖示
+        val cornerImageView = activity?.findViewById<ImageView>(R.id.corner_image)
+
+        // 引用上方大圖片
+        val topImageView = view.findViewById<ImageView>(R.id.top_image)
 
         // 設置每個圖片的點擊事件
         for (i in 0 until roleGrid.childCount) {
@@ -117,7 +119,12 @@ class PersonFragment : Fragment() {
                     img.background = null
                     img.setPadding(originalPadding, originalPadding, originalPadding, originalPadding)
                     val params = img.layoutParams as ViewGroup.MarginLayoutParams
-                    params.setMargins(originalLayoutParams.leftMargin, originalLayoutParams.topMargin, originalLayoutParams.rightMargin, originalLayoutParams.bottomMargin)
+                    params.setMargins(
+                        originalLayoutParams.leftMargin,
+                        originalLayoutParams.topMargin,
+                        originalLayoutParams.rightMargin,
+                        originalLayoutParams.bottomMargin
+                    )
                     img.layoutParams = params
                 }
 
@@ -152,7 +159,7 @@ class PersonFragment : Fragment() {
                 // 更新圖片
                 selectedImageRes?.let {
                     topImageView.setImageResource(it) // 上方大圖片
-                    cornerImageView.setImageResource(it) // 右上角小圖示
+                    cornerImageView?.setImageResource(it) // Toolbar 右上角小圖示
                 }
 
                 dialog.dismiss()
@@ -163,6 +170,7 @@ class PersonFragment : Fragment() {
             .create()
             .show()
     }
+
 
 
 }

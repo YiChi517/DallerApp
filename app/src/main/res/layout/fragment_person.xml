@@ -7,9 +7,6 @@
     android:background="#333333"
     android:padding="16dp">
 
-    <!-- 頂部按鈕區域 -->
-    <include
-        layout="@layout/custom_toolbar" />
 
     <!-- 上方圖片區域 -->
     <ImageView
